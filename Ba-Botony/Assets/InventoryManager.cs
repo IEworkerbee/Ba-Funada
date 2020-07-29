@@ -17,6 +17,28 @@ public class InventoryManager : MonoBehaviour {
     private Color tempColor;
     private Text text;
 
+    public bool doesContain(Flora[] floraArray, Flora flora) {
+        foreach (Flora i in floraArray) {
+            if(i != null) {
+                if(flora.name == i.name && flora.currentState == i.currentState) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public int newIndexOf(Flora[] floraArray, Flora flora) {
+        int indexNum = 0;
+        foreach (Flora i in floraArray) {
+            if(flora.name == i.name && flora.currentState == i.currentState) {
+                return indexNum;
+            }
+            indexNum += 1;
+        }
+        return -1;
+    }
+
     // Gets FloraList
     public Flora[] getFloraList() {
         return floraList;
@@ -54,8 +76,8 @@ public class InventoryManager : MonoBehaviour {
     // adds an item to the inventory
     public void addItem(Flora flora) {
         checkAdd();        
-        if (floraList.Contains(flora)) {
-            floraAmounts[Array.IndexOf(floraList, flora)] += 1;
+        if (doesContain(floraList, flora)) {
+            floraAmounts[newIndexOf(floraList, flora)] += 1;
         } else if (canAdd) {
             for (int i = 0; i < 5; i++) {
                 if (floraAmounts[i] == 0) {
@@ -72,8 +94,8 @@ public class InventoryManager : MonoBehaviour {
 
     // Removes item from inventory
     public void removeItem(Flora flora) {
-        if (floraList.Contains(flora) && floraAmounts[Array.IndexOf(floraList, flora)] > 0) {
-            floraAmounts[Array.IndexOf(floraList, flora)] -= 1;
+        if (doesContain(floraList, flora) && floraAmounts[newIndexOf(floraList, flora)] > 0) {
+            floraAmounts[newIndexOf(floraList, flora)] -= 1;
         }
         refreshSprites();
     }
@@ -136,7 +158,7 @@ public class InventoryManager : MonoBehaviour {
 
     // Checks to see if you can pick another one of the item
     public bool checkCap(Flora flora) {
-        if (floraList.Contains(flora) && floraAmounts[Array.IndexOf(floraList, flora)] > (inventoryCap - 1)) {
+        if (doesContain(floraList, flora) && floraAmounts[newIndexOf(floraList, flora)] > (inventoryCap - 1)) {
             return false;
         } else {
             return true;

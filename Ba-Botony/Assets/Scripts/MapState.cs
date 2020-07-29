@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using KaeganKoski.MapChanges;
 
-[CreateAssetMenu(fileName = "New Flora", menuName = "ScriptableObjects/Flora", order = 1)]
+[CreateAssetMenu(fileName = "New MapState", menuName = "ScriptableObjects/MapStates", order = 2)]
 public class MapState : ScriptableObject {
     public List<MapChange> mapUpdates = new List<MapChange>();
     public List<SMapChange> SmapUpdates = new List<SMapChange>();

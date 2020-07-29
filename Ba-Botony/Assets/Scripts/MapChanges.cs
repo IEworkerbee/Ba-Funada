@@ -24,7 +24,7 @@ namespace KaeganKoski.MapChanges {
                 tempPosition.x = smappy.position[0];
                 tempPosition.y = smappy.position[1];
                 tempPosition.z = smappy.position[2];
-                Flora tempFlora = Resources.Load<Flora>(smappy.floraName);
+                Flora tempFlora = new Flora(smappy.floraName);
                 MapChange mapChange = new MapChange(tempPosition, smappy.isDestroy, tempFlora);
                 mapUpdates.Add(mapChange);
             }

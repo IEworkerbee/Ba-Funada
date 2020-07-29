@@ -112,6 +112,12 @@ public class BafaController : MonoBehaviour {
                 Time.timeScale = 1f;
             }
         }
+
+        if (Input.GetKeyDown("i") && isInputEnabled) {
+            Flora floraTest = new Flora("overworldtilesheet_blueFlowers (UnityEngine.Tilemaps.Tile)");
+            floraTest.changeState("chopped");
+            Inventory.GetComponent<InventoryManager>().addItem(floraTest);
+        }
     }
 
     // Stores what you are touching
@@ -140,7 +146,7 @@ public class BafaController : MonoBehaviour {
     
     // Pick flowers animations (Sprite and player)
     private IEnumerator pickFlowers(string tileNameReal, int timeDur) {
-        Flora flora = Resources.Load<Flora>("flora/" + tileNameReal + "Flora");
+        Flora flora = new Flora(tileNameReal);
         if (Inventory.GetComponent<InventoryManager>().checkCap(flora)) {
             isInputEnabled = false;
             animator.SetBool("IsPickingFlowers", true);
@@ -206,7 +212,9 @@ public class BafaController : MonoBehaviour {
             for (int i = 0; i < data.floraInventory.Length; i++) {
                 for (int y = 0; y < 5; y++) {
                     if (tempFloraAmounts[y] > 0) {
-                        currentFlora = Resources.Load<Flora>("flora/" + data.floraInventory[i]);
+                        Debug.Log(data.floraStatesReal[i]);
+                        currentFlora = new Flora(data.floraInventory[i]);
+                        currentFlora.changeState(data.floraStatesReal[i]);
                         tempFloraList[y] = currentFlora;
                         i += 1;
                     }

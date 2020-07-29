@@ -13,7 +13,9 @@ public class PlayerData {
     public int[] floraInventoryAmounts;
     public int sceneIndex = SceneManager.GetActiveScene().buildIndex;
     public string[] floraInventoryReal = new string[0];
+    public string[] floraStates = new string[0];
     public string[] floraInventory;
+    public string[] floraStatesReal;
     public List<SMapChange> mapState;
     
     private string[] getFloraInventory(Flora[] floraList) {
@@ -26,8 +28,19 @@ public class PlayerData {
         return floraInventoryReal;
     }
 
+    private string[] getFloraStates(Flora[] floraList) {
+        for(int i = 0; i < 5; i++) {
+            if (floraList[i] != null) {
+                Array.Resize(ref floraStates, floraStates.Length + 1);
+                floraStates[i] = floraList[i].currentState;
+            }
+        }
+        return floraStates;
+    }
+
     // Initialiser
     public PlayerData(BafaController bafa, Flora[] floraList, int[] floraAmounts) {
+        floraStatesReal = getFloraStates(floraList);
         mapState = MapChangers.serialize();
         floraInventory = getFloraInventory(floraList);
         floraInventoryAmounts = floraAmounts;
