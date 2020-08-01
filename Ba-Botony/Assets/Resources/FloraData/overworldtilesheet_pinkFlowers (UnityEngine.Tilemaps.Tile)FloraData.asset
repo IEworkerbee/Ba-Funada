@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 090def6824ac6964492bef62917f94de, type: 3}
+  m_Name: overworldtilesheet_pinkFlowers (UnityEngine.Tilemaps.Tile)FloraData
+  m_EditorClassIdentifier: 
+  spriteStates:
+  - {fileID: 21300000, guid: 452e7e1a38f24fc4789cc31d2284f7ff, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  states:
+  - raw
+  - chopped
+  - ground
+  tile: {fileID: 11400000, guid: 06d4d92cdb7362244a1796e5dc40d8ea, type: 2}
+  currentState: raw
+  inventorySprite: {fileID: 21300000, guid: 452e7e1a38f24fc4789cc31d2284f7ff, type: 3}

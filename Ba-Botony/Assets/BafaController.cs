@@ -78,6 +78,8 @@ public class BafaController : MonoBehaviour {
                 showDialogue(col.gameObject.GetComponent<CharacterInfo>().dialogue);
                 StartCoroutine(waitDialogueExit());
             } else if (col.gameObject.name == "DoorObjects") {
+                this.transform.position = new Vector3(-7.5f, -4.3f, 0);
+                SaveGame.SaveBafa(this, Inventory.GetComponent<InventoryManager>().getFloraList(), Inventory.GetComponent<InventoryManager>().getFloraAmounts());
                 SceneManager.LoadScene("BafaHouse");
             }
         }
