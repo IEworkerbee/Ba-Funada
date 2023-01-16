@@ -24,7 +24,7 @@ public class BafaController : MonoBehaviour {
     public Tilemap tMap;
 
     // Editable by UI
-    public float moveSpeed = 4f;
+    public float moveSpeed = 3f;
     public string[] approvedFlora;
 
     // Setup
@@ -49,18 +49,20 @@ public class BafaController : MonoBehaviour {
         isInputEnabled = true;
         Panel.SetActive(false);
         position = this.transform.position;
-        this.transform.position = new Vector3(position.x, position.y, -0.01f);
+        this.transform.position = new Vector3((int)position.x, (int)position.y, -0.01f);
     }
 
     void Update() {
         // Updating Variables
+        cam.orthographicSize = ((float)Screen.currentResolution.height / (4f * 16f)) * 0.25f;
         position = this.transform.position;
         playedTime += Time.fixedDeltaTime;
 
         cam.transform.position = new Vector3(position.x, position.y, -4);
+
         // Get Player input axis
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        movement.x = (int)Input.GetAxisRaw("Horizontal");
+        movement.y = (int)Input.GetAxisRaw("Vertical");
         if (isInputEnabled) {
             animator.SetFloat("Speed", movement.sqrMagnitude);
         }
@@ -175,18 +177,22 @@ public class BafaController : MonoBehaviour {
 
     // do physics changes here
     void FixedUpdate() {
+
         // moves player
         if (isInputEnabled) {
             rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
         }
+
+
     }
 
     // Runs after input
     private void LateUpdate() {
         // Changes sorting layer based off position
         rend.sortingOrder = -(int)(GetComponent<Collider2D>().bounds.min.y * 1000);
-    }
 
+    }
+ 
     // Saves Player
     public void saveBafa() {
         SaveGame.SaveBafa(this, Inventory.GetComponent<InventoryManager>().getFloraList(), Inventory.GetComponent<InventoryManager>().getFloraAmounts());
@@ -221,4 +227,6 @@ public class BafaController : MonoBehaviour {
             SaveGame.LoadMap(grid, tMap, data);
         }
     }
+
+
 } 
